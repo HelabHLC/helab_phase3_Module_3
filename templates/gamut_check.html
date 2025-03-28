@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Gamut Check</title>
+</head>
+<body>
+    <h1>HLC → Gamut Check</h1>
+    <form method="post">
+        H: <input type="number" name="hue" required><br>
+        L: <input type="number" name="lightness" required><br>
+        C: <input type="number" name="chroma" required><br>
+        <button type="submit">🔍 Prüfen</button>
+    </form>
+
+    {% if result %}
+        <h2>Ergebnis</h2>
+        <p><strong>HLC:</strong> {{ result.hlc }}</p>
+        <p><strong>LAB:</strong> {{ result.lab }}</p>
+        <p><strong>Status:</strong> {{ '✅ Im Gamut' if result.in_gamut else '❌ Außerhalb des Gamut' }}</p>
+    {% endif %}
+</body>
+</html>
