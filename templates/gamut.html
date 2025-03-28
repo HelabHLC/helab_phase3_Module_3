@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gamut Tool</title>
+    <link rel="stylesheet" href="/static/gamut.css">
+</head>
+<body>
+    <h1>HLC → Gamut Check</h1>
+    <form method="post">
+        <label>H: <input type="number" name="h" step="0.1" required></label><br>
+        <label>L: <input type="number" name="l" step="0.1" required></label><br>
+        <label>C: <input type="number" name="c" step="0.1" required></label><br>
+        <button type="submit">🔍 Prüfen</button>
+    </form>
+
+    {% if result %}
+        <h2>Ergebnis</h2>
+        <p>LAB: {{ result.lab }}</p>
+        <p>Status: {{ "✅ Im Gamut" if result.in_gamut else "❌ Außerhalb des Gamut" }}</p>
+    {% endif %}
+</body>
+</html>
