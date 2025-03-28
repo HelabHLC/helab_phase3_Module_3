@@ -1,24 +1,113 @@
-
+# Neue, gepimpte HTML-Version von gamut_check.html
+new_html_content = """
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Gamut Check</title>
+    <title>HLC → Gamut Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        input[type=number] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background: #3366cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #254a99;
+        }
+        .result {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .status {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .color-preview {
+            margin: 20px auto;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 <body>
-    <h1>HLC → Gamut Check</h1>
-    <form method="post">
-        H: <input type="number" name="hue" required><br>
-        L: <input type="number" name="lightness" required><br>
-        C: <input type="number" name="chroma" required><br>
-        <button type="submit">🔍 Prüfen</button>
-    </form>
+    <div class="container">
+        <h1>🎨 HLC → Gamut Check</h1>
+        <form method="post">
+            <label>H (Hue):</label>
+            <input type="number" name="hue" required>
 
-    {% if result %}
-        <h2>Ergebnis</h2>
-        <p><strong>HLC:</strong> {{ result.hlc }}</p>
-        <p><strong>LAB:</strong> {{ result.lab }}</p>
-        <p><strong>Status:</strong> {{ '✅ Im Gamut' if result.in_gamut else '❌ Außerhalb des Gamut' }}</p>
-    {% endif %}
+            <label>L (Lightness):</label>
+            <input type="number" name="lightness" required>
+
+            <label>C (Chroma):</label>
+            <input type="number" name="chroma" required>
+
+            <button type="submit">🔍 Prüfen</button>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <p><strong>HLC-Code:</strong> {{ result.hlc }}</p>
+            <p><strong>LAB:</strong> {{ result.lab }}</p>
+
+            {% if result.lab %}
+            <div class="color-preview" style="background: rgb(
+                {{ ((result.lab.L + 16) / 116)**3 if result.lab else 1 }},
+                {{ ((result.lab.a + 128) / 255)*255 if result.lab else 0 }},
+                {{ ((result.lab.b + 128) / 255)*255 if result.lab else 0 }}
+            );"></div>
+            {% endif %}
+
+            <p class="status" style="color: {{ 'green' if result.in_gamut else 'red' }}">
+                {{ '✅ Im Gamut' if result.in_gamut else '❌ Außerhalb des Gamut' }}
+            </p>
+        </div>
+        {% endif %}
+    </div>
 </body>
 </html>
+"""
+
+# Datei speichern
+updated_html_path = "/mnt/data/gamut_check_pimped.html"
+with open(updated_html_path, "w") as f:
+    f.write(new_html_content)
+
+updated_html_path
