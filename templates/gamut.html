@@ -18,5 +18,27 @@
         <p>LAB: {{ result.lab }}</p>
         <p>Status: {{ "✅ Im Gamut" if result.in_gamut else "❌ Außerhalb des Gamut" }}</p>
     {% endif %}
+    <form method="POST">
+  <label for="icc_profile">ICC-Profil wählen:</label>
+  <select name="icc_profile" id="icc_profile">
+    <option value="TextileRGB_FOGRA58.icc">TextileRGB_FOGRA58</option>
+    <option value="PSOcoated_v3.icc">PSO Coated v3</option>
+    <option value="ISOcoated_v2_300_eci.icc">ISO Coated v2 300%</option>
+    <!-- Weitere Profile hier hinzufügen -->
+  </select>
+  <br><br>
+
+  <label for="h">H:</label>
+  <input type="text" name="h" id="h">
+
+  <label for="l">L:</label>
+  <input type="text" name="l" id="l">
+
+  <label for="c">C:</label>
+  <input type="text" name="c" id="c">
+
+  <button type="submit">🔍 Prüfen</button>
+</form>
+
 </body>
 </html>
