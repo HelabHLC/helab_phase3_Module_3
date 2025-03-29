@@ -1,44 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-    <title>Gamut Tool</title>
+    <meta charset="UTF-8">
+    <title>HEL✨AB – Gamut Check</title>
     <link rel="stylesheet" href="/static/gamut.css">
 </head>
 <body>
-    <h1>HLC → Gamut Check</h1>
-    <form method="post">
-        <label>H: <input type="number" name="h" step="0.1" required></label><br>
-        <label>L: <input type="number" name="l" step="0.1" required></label><br>
-        <label>C: <input type="number" name="c" step="0.1" required></label><br>
-        <button type="submit">🔍 Prüfen</button>
-    </form>
+    <div class="container">
+        <h1>🎨 HEL✨AB Gamut Checker</h1>
 
-    {% if result %}
-        <h2>Ergebnis</h2>
-        <p>LAB: {{ result.lab }}</p>
-        <p>Status: {{ "✅ Im Gamut" if result.in_gamut else "❌ Außerhalb des Gamut" }}</p>
-    {% endif %}
-    <form method="POST">
-  <label for="icc_profile">ICC-Profil wählen:</label>
-  <select name="icc_profile" id="icc_profile">
-    <option value="TextileRGB_FOGRA58.icc">TextileRGB_FOGRA58</option>
-    <option value="PSOcoated_v3.icc">PSO Coated v3</option>
-    <option value="ISOcoated_v2_300_eci.icc">ISO Coated v2 300%</option>
-    <!-- Weitere Profile hier hinzufügen -->
-  </select>
-  <br><br>
+        <form method="POST">
+            <label for="icc_profile">ICC-Profil wählen:</label>
+            <select name="icc_profile" id="icc_profile" onchange="this.form.submit()">
+                {% for profile in profiles %}
+                    <option value="{{ profile }}" {% if profile == selected_profile %}selected{% endif %}>
+                        {{ profile }}
+                    </option>
+                {% endfor %}
+            </select>
 
-  <label for="h">H:</label>
-  <input type="text" name="h" id="h">
+            <div class="hlc-inputs">
+                <label>H:</label>
+                <input type="text" name="h" maxlength="3" placeholder="z.B. 155" required>
+                <label>L:</label>
+                <input type="text" name="l" maxlength="3" placeholder="z.B. 075" required>
+                <label>C:</label>
+                <input type="text" name="c" maxlength="3" placeholder="z.B. 065" required>
+            </div>
 
-  <label for="l">L:</label>
-  <input type="text" name="l" id="l">
+            <button type="submit" class="check-btn">🔍 Prüfen</button>
+        </form>
 
-  <label for="c">C:</label>
-  <input type="text" name="c" id="c">
-
-  <button type="submit">🔍 Prüfen</button>
-</form>
-
+        {% if result %}
+            <div class="result">
+                <h2>Ergebnis</h2>
+                <p><strong>HLC:</strong> {{ result.hlc }}</p>
+                <p><strong>LAB:</strong> {{ result.lab }}</p>
+                <p><strong>Status:</strong> {{ result.status }}</p>
+            </div>
+        {% elif status %}
+            <div class="status-msg">{{ status }}</div>
+        {% endif %}
+    </div>
 </body>
 </html>
+
