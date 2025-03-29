@@ -1,8 +1,31 @@
+
 <!DOCTYPE html>
-<html>
-<head><title>HELAB Modul 3</title></head>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>HEL✨AB Connect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
 <body>
-<h1>Willkommen bei HELAB Modul 3</h1>
-<a href="/tools/gamut">🎨 Zum Gamut Tool</a>
+  <header>
+    <h1>🎨 HEL✨AB Connect</h1>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('farbnamen') }}">Modul 1 – Farbnamen → LAB</a></li>
+        <li><a href="{{ url_for('lab_to_hlc') }}">Modul 2 – LAB → HLC</a></li>
+        <li><a href="{{ url_for('gamut_tool') }}">Modul 3 – Gamut Check</a></li>
+        <li><a href="{{ url_for('icc_grid') }}">Modul 4 – ICC-Grid</a></li>
+        <li><a href="{{ url_for('tools') }}">🔧 Tools</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <p>Wähle ein Modul, um deine Farbraumanalyse zu starten.</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 HEL✨AB by Norbert & GPT</p>
+  </footer>
 </body>
 </html>
