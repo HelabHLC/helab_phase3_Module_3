@@ -1,47 +1,40 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>HEL✨AB – Gamut Check</title>
-    <link rel="stylesheet" href="/static/gamut.css">
+  <meta charset="UTF-8">
+  <title>Gamut-Checker</title>
+  <style>
+    body { font-family: sans-serif; padding: 2em; }
+    .color-box { width: 100px; height: 100px; border: 1px solid #ccc; margin-top: 1em; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎨 HEL✨AB Gamut Checker</h1>
+  <h1>Gamut-Checker (HLC → LAB → sRGB)</h1>
+  <form method="post">
+    <label>H: <input name="h" required></label>
+    <label>L: <input name="l" required></label>
+    <label>C: <input name="c" required></label>
+    <button type="submit">Prüfen</button>
+  </form>
 
-        <form method="POST">
-            <label for="icc_profile">ICC-Profil wählen:</label>
-            <select name="icc_profile" id="icc_profile" onchange="this.form.submit()">
-                {% for profile in profiles %}
-                    <option value="{{ profile }}" {% if profile == selected_profile %}selected{% endif %}>
-                        {{ profile }}
-                    </option>
-                {% endfor %}
-            </select>
+  {% if lab_l is defined %}
+    <h2>Ergebnisse</h2>
+    <p><strong>HLC:</strong> H{{ h }} L{{ l }} C{{ c }}</p>
+    <p><strong>Lab:</strong> {{ lab_l }} / {{ lab_a }} / {{ lab_b }}</p>
+    <p><strong>sRGB:</strong> {{ rgb_r }} / {{ rgb_g }} / {{ rgb_b }}</p>
+    <p><strong>HEX:</strong> #{{ hex }}</p>
 
-            <div class="hlc-inputs">
-                <label>H:</label>
-                <input type="text" name="h" maxlength="3" placeholder="z.B. 155" required>
-                <label>L:</label>
-                <input type="text" name="l" maxlength="3" placeholder="z.B. 075" required>
-                <label>C:</label>
-                <input type="text" name="c" maxlength="3" placeholder="z.B. 065" required>
-            </div>
+    <div class="color-box" style="background-color:#{{ hex }}"></div>
 
-            <button type="submit" class="check-btn">🔍 Prüfen</button>
-        </form>
-
-        {% if result %}
-            <div class="result">
-                <h2>Ergebnis</h2>
-                <p><strong>HLC:</strong> {{ result.hlc }}</p>
-                <p><strong>LAB:</strong> {{ result.lab }}</p>
-                <p><strong>Status:</strong> {{ result.status }}</p>
-            </div>
-        {% elif status %}
-            <div class="status-msg">{{ status }}</div>
-        {% endif %}
-    </div>
+    <p><strong>Status:</strong>
+      {% if in_gamut %}
+        ✅ Innerhalb des sRGB-Gamut
+      {% else %}
+        ❌ Außerhalb des sRGB-Gamut
+      {% endif %}
+    </p>
+  {% endif %}
 </body>
 </html>
+
 
