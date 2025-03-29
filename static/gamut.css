@@ -1,86 +1,66 @@
 body {
-  background: linear-gradient(135deg, #f9f9f9, #eaeaea);
-  font-family: 'Segoe UI', sans-serif;
-  color: #222;
-  margin: 0;
-  padding: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #f8f8f8;
+    color: #333;
+    margin: 0;
+    padding: 2rem;
 }
 
 .container {
-  max-width: 600px;
-  margin: 40px auto;
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-  text-align: center;
-  color: #2a9d8f;
-  font-size: 28px;
-  margin-bottom: 30px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    color: #222;
+    margin-bottom: 1rem;
 }
 
 label {
-  font-weight: 600;
-  margin-bottom: 5px;
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
 }
 
 input[type="text"] {
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  transition: border-color 0.3s;
+    width: 80px;
+    padding: 0.5rem;
+    margin-right: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
 
-input[type="text"]:focus {
-  border-color: #2a9d8f;
-  outline: none;
+select {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #aaa;
 }
 
-button {
-  background-color: #2a9d8f;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+.check-btn {
+    margin-top: 1.5rem;
+    background: #5c8df6;
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
-button:hover {
-  background-color: #21867a;
-  cursor: pointer;
+.check-btn:hover {
+    background: #3f6ee7;
 }
 
-.result-box {
-  margin-top: 25px;
-  background-color: #f3fdfd;
-  border-left: 5px solid #2a9d8f;
-  padding: 20px;
-  border-radius: 6px;
-  font-size: 16px;
+.result, .status-msg {
+    margin-top: 2rem;
+    background: #f0f4ff;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #5c8df6;
 }
 
-.result-status {
-  margin-top: 10px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.result-status.ok {
-  color: #2a9d8f;
-}
-
-.result-status.fail {
-  color: #e63946;
-}
