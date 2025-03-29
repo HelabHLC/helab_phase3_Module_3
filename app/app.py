@@ -27,6 +27,9 @@ def gamut():
         c = request.form["c"]
 
         # Dummy-Konvertierung HLC → Lab
+        if __name__ == "__main__":
+    app.run(debug=True)
+
         # Hier ersetzt du später mit echten HLC→Lab-Werten
         lab_l = float(l)
         lab_a = float(c)
